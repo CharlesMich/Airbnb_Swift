@@ -11,15 +11,21 @@ struct ExploreView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
+                SearchAndFilterBar()
                 LazyVStack {
                     ForEach(0 ... 10, id: \.self) {listing in
-                        Rectangle()
-                            .frame(height: 400)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                        NavigationLink(value: listing) {
+                            ListingItemView()
+                                .frame(height: 400)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                        }
                         
                     }
                 }
                 .padding()
+            }
+            .navigationDestination(for: Int.self) {
+                listing in Text("Listing detail view...")
             }
         }
     }

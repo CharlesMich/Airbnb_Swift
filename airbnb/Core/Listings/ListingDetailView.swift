@@ -8,8 +8,32 @@
 import SwiftUI
 
 struct ListingDetailView: View {
+    var images = [
+    "listing-1",
+    "listing-2",
+    "listine-3",
+    "listing-4",
+    ]
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            ListingImageCarouselView()
+                .frame(height:320)
+            
+            VStack(alignment: .leading, spacing: 0){
+                Text("Miami VIlla")
+                    .font(.title)
+                    .fontWeight(.semibold)
+                
+                VStack(alignment: .leading){
+                    HStack(spacing: 2) {
+                       
+                            Image(systemName: "star.fill")
+                        Text("4.86")
+                        }
+                    .foregroundStyle(.black)
+                    }
+            }
+        }
     }
 }
 
