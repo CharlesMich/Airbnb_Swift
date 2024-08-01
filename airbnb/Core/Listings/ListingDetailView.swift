@@ -29,9 +29,82 @@ struct ListingDetailView: View {
                        
                             Image(systemName: "star.fill")
                         Text("4.86")
+                        Text("-")
+                        Text("28  Reviews")
+                            .underline()
+                            .fontWeight(.semibold)
                         }
+                   
                     .foregroundStyle(.black)
+                    Text("Miami, Florida")
                     }
+                .font(.caption)
+            }
+            .padding(.leading)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            Divider()
+            
+//             host info view
+            HStack{
+                VStack (alignment:.leading, spacing:4){
+                    Text("Entire Villa hosted by John Smith")
+                        .font(.headline)
+                        .frame(width:250, alignment: .leading)
+                    HStack(spacing:2) {
+                        Text("4 guests -")
+                        Text("4 bedrooms -")
+                        Text("4 beds-")
+                        Text("4 baths")
+                    }
+                    .font(.caption)
+                }
+                .frame(width:300, alignment: .leading)
+                Spacer()
+                Image("male-profile-photo")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width:64, height:64)
+                    .clipShape(Circle())
+                
+            }
+            .padding()
+            Divider()
+            
+            VStack(alignment: .leading, spacing:16) {
+                ForEach(0..<2){feature in
+                    HStack(spacing:12){
+                        Image(systemName: "medal")
+                        VStack(alignment: .leading){
+                            Text("Superhost")
+                                .font(.footnote)
+                                .fontWeight(.semibold)
+                            Text("fhskjfhsd skdjfhskhdf skjdhfksjfh ksjhfjsdfh fksjhksjfdh jfhsdh fhdjf")
+                                .font(.caption)
+                                .foregroundStyle(.gray)
+                        }
+                        Spacer()
+                    }
+                }
+            }
+//            .frame(maxWidth)
+            .padding()
+            Divider()
+            
+            VStack(alignment: .leading){
+                Text("Where you will sleep")
+                    .font(.headline)
+                ScrollView(.horizontal, showsIndicators: false){
+                    HStack(spacing: 16) {
+                        ForEach(1..<6) {
+                            bedroom in
+                            
+                            VStack {
+                                Image(systemName: "bed.double")
+                                Text("Bedroom \(bedroom)")
+                            }
+                        }
+                    }
+                }
             }
         }
     }
