@@ -20,19 +20,31 @@ struct DestinationSearchView: View {
     @State private var selectedOption: DestinationSearchOptions = .location
     @State private var startDate = Date()
     @State private var endDate = Date()
+    @State private var numGuests = 0
     
     var body: some View {
         VStack {
-            Button {
-                withAnimation(.snappy) {
-                    show.toggle()
+            HStack{
+                Button {
+                    withAnimation(.snappy) {
+                        show.toggle()
+                    }
+                    
+                } label:{
+                    Image(systemName: "xmark.circle")
+                        .imageScale(.large)
+                        .foregroundStyle(.black)
                 }
-                
-            } label:{
-                Image(systemName: "xmark.circle")
-                    .imageScale(.large)
+                Spacer()
+                if !destination.isEmpty {
+                    Button("clear") {
+                        destination = ""
+                    }
                     .foregroundStyle(.black)
+                    .font(.subheadline)
+                }
             }
+            .padding()
             VStack(alignment: .leading){
                 if selectedOption == .location {
                     Text("where to?")
@@ -99,12 +111,21 @@ struct DestinationSearchView: View {
         }
         
         //        num selection view
-        VStack {
-            if selectedOption == .guests {
-                HStack{
-                    Text("Show expanded view")
-                    Spacer()
-                }
+            VStack(alignment: .leading) {
+                if selectedOption == .guests {
+                    
+                    Text("Who's coming")
+                        .font(.title)
+                        .fontWeight(.semibold)
+                    
+                    Stepper {
+                        Text("\(numGuests) Adults")
+                    } onIncrement: {
+                        numGuests += 1
+                    } onDecrement: {
+                        guard numGuests > 0 else {return}
+                        numGuests -= 1
+                    }
             } else {
                 CollapsedPickerView(title: "who", description: "Add guests")
             }
@@ -118,8 +139,11 @@ struct DestinationSearchView: View {
         .onTapGesture {
             withAnimation(.snappy) { selectedOption = .guests}
         }
+            Spacer()
      }
+        
     }
+    
   }
 
 #Preview {
