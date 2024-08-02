@@ -7,107 +7,131 @@
 
 import SwiftUI
 
+enum DestinationSearchOptions {
+    case location
+    case dates
+    case guests
+}
+
 struct DestinationSearchView: View {
     @Binding var show: Bool
     @State private var destination = ""
+    @State private var selectedOption: DestinationSearchOptions = .location
     var body: some View {
         VStack {
             Button {
                 withAnimation(.snappy) {
                     show.toggle()
                 }
-               
+                
             } label:{
                 Image(systemName: "xmark.circle")
                     .imageScale(.large)
                     .foregroundStyle(.black)
             }
             VStack(alignment: .leading){
-                Text("where to?")
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                        .imageScale(.small)
-                    TextField("Search Destination", text:$destination)
-                        .font(.subheadline)
-                }
-                .frame(height:44)
-                .padding(.horizontal)
-                .overlay {
-                    RoundedRectangle(cornerRadius: 8.0)
-                        .stroke(lineWidth: /*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
-                        .foregroundStyle(Color(.systemGray4))
+                if selectedOption == .location {
+                    Text("where to?")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .imageScale(.small)
+                        TextField("Search Destination", text:$destination)
+                            .font(.subheadline)
+                    }
+                    .frame(height:44)
+                    .padding(.horizontal)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 8.0)
+                            .stroke(lineWidth: /*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
+                            .foregroundStyle(Color(.systemGray4))
+                    }
+                } else {
+                    CollapsedPickerView(title: "where", description: "Add destination")
                 }
             }
             .padding()
+            .frame(height: selectedOption == .location ? 120 : 64)
             .background(.white)
             .clipShape(RoundedRectangle(cornerRadius: 12))
             .padding()
             .shadow(radius:10)
-        }
-        
-//        data selection view
-        VStack{
-            HStack {
-                Text("when")
-                    .foregroundStyle(.gray)
-                Spacer()
-                
-                Text("Add dates")
+            .onTapGesture {
+                withAnimation(.snappy) { selectedOption = .location}
             }
-            .fontWeight(.semibold)
-            .font(.subheadline)
+        
+        
+        //        data selection view
+        VStack {
+            if selectedOption == .dates {
+                HStack{
+                    Text("Show expanded view")
+                    Spacer()
+                }
+               
+            } else {
+                CollapsedPickerView(title: "when", description: "Add dates")
+            }
         }
         .padding()
+        .frame(height: selectedOption == .dates ? 120 : 64)
         .background(.white)
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .padding()
         .shadow(radius:10)
+        .onTapGesture {
+            withAnimation(.snappy) { selectedOption = .dates}
+        }
         
-//        num selection view
-        VStack{
-            HStack {
-                Text("who")
-                    .foregroundStyle(.gray)
-                Spacer()
-                
-                Text("Add guests")
+        //        num selection view
+        VStack {
+            if selectedOption == .guests {
+                HStack{
+                    Text("Show expanded view")
+                    Spacer()
+                }
+            } else {
+                CollapsedPickerView(title: "who", description: "Add guests")
             }
-            .fontWeight(.semibold)
-            .font(.subheadline)
         }
         .padding()
+        .frame(height: selectedOption == .guests ? 120 : 64)
         .background(.white)
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .padding()
         .shadow(radius:10)
+        .onTapGesture {
+            withAnimation(.snappy) { selectedOption = .guests}
+        }
+     }
     }
-}
+  }
 
 #Preview {
     DestinationSearchView(show: .constant(false))
 }
 
-struct ExtractedView: View {
+struct CollapsedPickerView: View {
     let title: String
-    let descriptionL: String
+    let description: String
+    
     var body: some View {
         VStack{
             HStack {
-                Text("who")
+                Text(title)
                     .foregroundStyle(.gray)
                 Spacer()
                 
-                Text("Add guests")
+                Text(description)
             }
             .fontWeight(.semibold)
             .font(.subheadline)
         }
-        .padding()
-        .background(.white)
-        .clipShape(RoundedRectangle(cornerRadius: 12))
-        .padding()
-        .shadow(radius:10)
+//        .padding()
+//        .background(.white)
+//        .clipShape(RoundedRectangle(cornerRadius: 12))
+//        .padding()
+//        .shadow(radius:10)
     }
 }
