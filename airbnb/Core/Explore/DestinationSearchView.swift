@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 enum DestinationSearchOptions {
     case location
     case dates
@@ -17,6 +18,9 @@ struct DestinationSearchView: View {
     @Binding var show: Bool
     @State private var destination = ""
     @State private var selectedOption: DestinationSearchOptions = .location
+    @State private var startDate = Date()
+    @State private var endDate = Date()
+    
     var body: some View {
         VStack {
             Button {
@@ -63,19 +67,29 @@ struct DestinationSearchView: View {
         
         
         //        data selection view
-        VStack {
+            VStack(alignment: .leading) {
             if selectedOption == .dates {
-                HStack{
-                    Text("Show expanded view")
-                    Spacer()
-                }
+               
+                    Text("when's your trip?")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+//                    Spacer()
+                    VStack {
+                        DatePicker("From", selection: $startDate, displayedComponents: .date)
+                        Divider()
+                        DatePicker("To", selection: $endDate, displayedComponents: .date)
+                    }
+                    .foregroundStyle(.gray)
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                
                
             } else {
                 CollapsedPickerView(title: "when", description: "Add dates")
             }
         }
         .padding()
-        .frame(height: selectedOption == .dates ? 120 : 64)
+        .frame(height: selectedOption == .dates ? 180 : 64)
         .background(.white)
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .padding()
