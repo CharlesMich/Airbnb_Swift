@@ -67,12 +67,8 @@ struct DestinationSearchView: View {
                     CollapsedPickerView(title: "where", description: "Add destination")
                 }
             }
-            .padding()
+            .modifier(CollapsibleDestinationViewModifier())
             .frame(height: selectedOption == .location ? 120 : 64)
-            .background(.white)
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-            .padding()
-            .shadow(radius:10)
             .onTapGesture {
                 withAnimation(.snappy) { selectedOption = .location}
             }
@@ -100,12 +96,8 @@ struct DestinationSearchView: View {
                 CollapsedPickerView(title: "when", description: "Add dates")
             }
         }
-        .padding()
+        .modifier(CollapsibleDestinationViewModifier())
         .frame(height: selectedOption == .dates ? 180 : 64)
-        .background(.white)
-        .clipShape(RoundedRectangle(cornerRadius: 12))
-        .padding()
-        .shadow(radius:10)
         .onTapGesture {
             withAnimation(.snappy) { selectedOption = .dates}
         }
@@ -130,12 +122,8 @@ struct DestinationSearchView: View {
                 CollapsedPickerView(title: "who", description: "Add guests")
             }
         }
-        .padding()
-        .frame(height: selectedOption == .guests ? 120 : 64)
-        .background(.white)
-        .clipShape(RoundedRectangle(cornerRadius: 12))
-        .padding()
-        .shadow(radius:10)
+            .modifier(CollapsibleDestinationViewModifier())
+            .frame(height: selectedOption == .guests ? 120 : 64)
         .onTapGesture {
             withAnimation(.snappy) { selectedOption = .guests}
         }
@@ -148,6 +136,18 @@ struct DestinationSearchView: View {
 
 #Preview {
     DestinationSearchView(show: .constant(false))
+}
+
+struct CollapsibleDestinationViewModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .padding()
+//            .frame(height: selectedOption == .guests ? 120 : 64)
+            .background(.white)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .padding()
+            .shadow(radius:10)
+    }
 }
 
 struct CollapsedPickerView: View {
