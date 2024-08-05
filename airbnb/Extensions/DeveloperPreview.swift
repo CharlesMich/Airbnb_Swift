@@ -35,7 +35,7 @@ class DeveloperPreview {
         .init(
             id: NSUUID().uuidString,
             ownerUid: NSUUID().uuidString,
-            ownerName: "Charles Michael",
+            ownerName: "Lyn Michael",
             ownerImageUrl: "male-profile-photo",
             numberOfBedrooms: 4,
             numberOfBathrooms: 3,
@@ -57,7 +57,7 @@ class DeveloperPreview {
         .init(
             id: NSUUID().uuidString,
             ownerUid: NSUUID().uuidString,
-            ownerName: "Charles Michael",
+            ownerName: "Alisha Michael",
             ownerImageUrl: "male-profile-photo",
             numberOfBedrooms: 4,
             numberOfBathrooms: 3,
@@ -79,7 +79,7 @@ class DeveloperPreview {
         .init(
             id: NSUUID().uuidString,
             ownerUid: NSUUID().uuidString,
-            ownerName: "Charles Michael",
+            ownerName: "Devon Michael",
             ownerImageUrl: "male-profile-photo",
             numberOfBedrooms: 4,
             numberOfBathrooms: 3,
