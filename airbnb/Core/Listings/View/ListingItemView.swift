@@ -21,7 +21,7 @@ struct ListingItemView: View {
         VStack(spacing: 8) {
 //            images
             
-            ListingImageCarouselView()
+            ListingImageCarouselView(listing: listing)
                 .frame(height:320)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
         

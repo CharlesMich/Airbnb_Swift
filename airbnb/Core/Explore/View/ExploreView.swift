@@ -10,6 +10,7 @@ import SwiftUI
 struct ExploreView: View {
     @State private var showDestinationSearchView = false;
     @StateObject var viewModel = ExploreViewModel(service: ExploreService())
+   
     
     var body: some View {
         NavigationStack {
@@ -37,9 +38,9 @@ struct ExploreView: View {
                     }
                     .padding()
                 }
-                .navigationDestination(for: Int.self) {
+                .navigationDestination(for: Listing.self) {
                     listing in
-                  ListingDetailView()
+                    ListingDetailView(listing:listing)
                         .navigationBarBackButtonHidden()
                 }
             }
