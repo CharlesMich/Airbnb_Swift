@@ -97,12 +97,12 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		3400EC972C604E7A0042961B /* ViewModal */ = {
+		3400EC972C604E7A0042961B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				3400EC982C604EDA0042961B /* ExploreViewModel.swift */,
 			);
-			path = ViewModal;
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		342BB6CC2C53031000D72F4F /* Components */ = {
@@ -201,7 +201,7 @@
 		34989B752C371CE8003963C2 /* Explore */ = {
 			isa = PBXGroup;
 			children = (
-				3400EC972C604E7A0042961B /* ViewModal */,
+				3400EC972C604E7A0042961B /* ViewModel */,
 				3400EC962C604E710042961B /* View */,
 				3400EC952C604E470042961B /* Service */,
 			);
